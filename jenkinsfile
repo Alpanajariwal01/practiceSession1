@@ -19,6 +19,23 @@ pipeline{
             bat "echo deployed"
             }
         }
+        stage("Publish to Artifactory"){
+            steps{
+                rtMavenDeployer(
+                    id: 'deployer',
+                    serverId: 'practiceSession1@artifactory',
+                    releaseRepo: 'practiceSession1',
+                    snapshotRepo: 'practiceSession1'
+                )
+                rtMavenRun(
+                    pom: 'pom.xml',
+                    goals: 'clean install',
+                    deployerId: 'deployer'
+                    )
+                rtPublishBuildInfo(
+                    serverId: 'practiceSession1@artifactory',
+                )
+            }
     }
     post{
         success{
