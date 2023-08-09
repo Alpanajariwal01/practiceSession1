@@ -1,0 +1,35 @@
+pipeline{
+    agent any
+      environment {
+    notifyEmail ="alpana@nagarro.com"
+  }
+    tools{
+        maven 'maven_home'
+    }
+    triggers {
+      cron('0 06 * * *')
+    }
+    stages{
+        stage("Code Checkout"){
+            steps{
+            bat "echo checkout"
+            }
+        }
+        stage("Code test"){
+            steps{
+            bat "echo test"
+            }
+        }
+        stage("Code deployed"){
+            steps{
+            bat "echo deployed"
+            }
+        }
+    }
+    post{
+        success{
+            bat "echo success"
+            }
+        
+        }
+}
