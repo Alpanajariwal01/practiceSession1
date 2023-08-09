@@ -3,12 +3,6 @@ pipeline{
       environment {
     notifyEmail ="alpana@nagarro.com"
   }
-    tools{
-        maven 'maven_home'
-    }
-    triggers {
-      cron('0 06 * * *')
-    }
     stages{
         stage("Code Checkout"){
             steps{
